@@ -1,0 +1,35 @@
+# The confidential and proprietary information contained in this file may
+# only be used by a person authorised under and to the extent permitted
+# by a subsisting licensing agreement from XIAORUI YIN.
+#
+#            (C) COPYRIGHT 2023~2024 XIAORUI YIN.
+#                     ALL RIGHTS RESERVED
+#
+# Author: Xiaorui Yin <xiaorui.yin@tutamail.com>
+#
+# Date: 31.08.2024
+#
+# Description:
+#
+# Changelog:
+
+
+package:
+  name: sv_crate
+  authors:
+    - "Xiaorui Yin <chinayinxiaorui@gmail.com>"
+
+dependencies:
+  common_cells:
+    { git: "https://github.com/pulp-platform/common_cells", version: 1.23.0 }
+
+export_include_dirs:
+  - rtl/include
+
+sources:
+  files:
+    - rtl/adder_tree.sv
+    - rtl/pipeline_reg.sv
+    - rtl/dw_converter/dw_upsizer.sv
+    - rtl/dw_converter/dw_downsizer.sv
+    - rtl/dw_converter/dw_converter.sv
