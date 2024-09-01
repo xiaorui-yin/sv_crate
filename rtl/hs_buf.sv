@@ -10,8 +10,11 @@
 // Date: 28.08.2024
 //
 // Changelog:
+// Handshake Buffer used to cut handshake critical path
+// 1. NoLat = 1'b1: No latency, equivalent to a spill register (FIFO depth = 2)
+// 2. NoLat = 1'b0: With latency, equivalent to a skid buffer (FIFO depth = 1)
 
-module pipeline_reg #(
+module hs_buf #(
   parameter type T      = logic,
   parameter bit  Bypass = 1'b0,
   parameter bit  NoLat  = 1'b1
@@ -26,7 +29,7 @@ module pipeline_reg #(
   output T     data_o
 );
 
-  if (NoLat) begin: gen_no_lat_reg
+  if (NoLat) begin: gen_spill_reg
     spill_register_flushable #(
       .T     (T     ),
       .Bypass(Bypass),
@@ -41,7 +44,7 @@ module pipeline_reg #(
       .ready_i(rdy_i ),
       .data_o (data_o)
     );
-  end else begin: gen_lat_reg
+  end else begin: gen_skid_buf
     logic full, empty, push, pop;
     assign push = vld_i && ~full && !flush_i;
     assign pop  = ~empty && vld_o;

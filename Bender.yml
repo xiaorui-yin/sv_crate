@@ -29,7 +29,8 @@ export_include_dirs:
 sources:
   files:
     - rtl/adder_tree.sv
-    - rtl/pipeline_reg.sv
+    - rtl/hs_buf.sv
+    - rtl/fifo.sv
     - rtl/dw_converter/dw_upsizer.sv
     - rtl/dw_converter/dw_downsizer.sv
     - rtl/dw_converter/dw_converter.sv
